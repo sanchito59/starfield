@@ -43,13 +43,25 @@
 
         var path6 = new Path.Rectangle({
             point: [75, 75],
-            size: [15, 15],
-            strokeColor: 'white',
-            strokeWidth: 2
+            size: [50, 50],
+            fillColor: 'red'
+        });
+        var path7 = new Path.Rectangle({
+            point: [75, 75],
+            size: [50, 50],
+            fillColor: 'blue'
         });
 
-        var group = new Group(path, path2, path3, path4, path5);
+        path6.opacity = 0.5;
+        path7.opacity = 0.5;
+        path7.blendMode = 'multiply';
 
+        //Multiplied blue squares follow mousemovement
+        function onMouseMove(event) {
+            path7.position = event.point;
+        }
+
+        var group = new Group(path, path2, path3, path4, path5);
         group.style = {
             strokeColor: 'white',
             strokeWidth: 5,
@@ -61,6 +73,7 @@
         var symbol4 = new Symbol(path4);
         var symbol5 = new Symbol(path5);
         var symbol6 = new Symbol(path6);
+        var symbol7 = new Symbol(path7);
 
         // Place the instances of the symbol:
         for (var i = 0; i < count; i++) {
@@ -101,6 +114,12 @@
             var placedSymbol = symbol6.place(center);
             placedSymbol.scale(i / count);
         }
+        for (var i = 0; i < squareCount; i++) {
+            // The center position is a random point in the view:
+            var center = Point.random() * view.size;
+            var placedSymbol = symbol7.place(center);
+            placedSymbol.scale(i / count);
+        }
 
         var destination = Point.random() * view.size;
         var destination2 = Point.random() * view.size;
@@ -111,7 +130,8 @@
         // The onFrame function is called up to 60 times a second:
         function onFrame(event) {
             //Rotate squares
-            path6.rotate(7);
+            path6.rotate(3);
+            path7.rotate(3);
             //Change the fill color for each star
             path.fillColor.hue += 5;
             path2.fillColor.hue += 5;

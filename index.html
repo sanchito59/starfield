@@ -13,6 +13,7 @@
         // The amount of circles we want to make:
         var count = 30;
         var squareCount = 50;
+        var squareCount2 = 15;
 
         // Create a symbol, which we will use to place instances of later:
         var path = new Path.Circle({
@@ -42,13 +43,13 @@
         });
 
         var path6 = new Path.Rectangle({
-            point: [75, 75],
+            point: [0, 0],
             size: [50, 50],
             fillColor: 'red'
         });
         var path7 = new Path.Rectangle({
             point: [75, 75],
-            size: [50, 50],
+            size: [500, 500],
             fillColor: 'blue'
         });
 
@@ -58,7 +59,7 @@
 
         //Multiplied blue squares follow mousemovement
         function onMouseMove(event) {
-            path7.position = event.point;
+            path7.position = event.middlePoint;
         }
 
         var group = new Group(path, path2, path3, path4, path5);
@@ -114,7 +115,7 @@
             var placedSymbol = symbol6.place(center);
             placedSymbol.scale(i / count);
         }
-        for (var i = 0; i < squareCount; i++) {
+        for (var i = 0; i < squareCount2; i++) {
             // The center position is a random point in the view:
             var center = Point.random() * view.size;
             var placedSymbol = symbol7.place(center);
@@ -133,11 +134,11 @@
             path6.rotate(3);
             path7.rotate(3);
             //Change the fill color for each star
-            path.fillColor.hue += 5;
-            path2.fillColor.hue += 5;
-            path3.fillColor.hue += 5;
-            path4.fillColor.hue += 5;
-            path5.fillColor.hue += 5;
+            path.fillColor.hue += 0.75;
+            path2.fillColor.hue += 0.75;
+            path3.fillColor.hue += 0.75;
+            path4.fillColor.hue += 0.75;
+            path5.fillColor.hue += 0.75;
 
             for (var i = 0; i < count; i++) {
                 var item = project.activeLayer.children[i];

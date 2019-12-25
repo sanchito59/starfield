@@ -68,13 +68,15 @@
         path.strokeColor = 'black';
         path.fillColor = 'white';
         path.opacity = 0.5;
+        this.remove();
       }
-
     }
+
+
     function onMouseDrag(event) {
       var path = new Path();
       path.strokeColor = Color.random();
-      path.strokeWidth = 1.5;
+      path.strokeWidth = 10;
       var vector = event.delta;
 
       // rotate the vector by 45 degrees:

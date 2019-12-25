@@ -42,6 +42,7 @@
       fillColor: 'rgb(255,251,150)',
     });
 
+    var myPath;
     for (var i = 0; i < 15; i++) {
       var mouseCircles = new Path.Circle({
         center: Point.random() * view.size,
@@ -51,11 +52,15 @@
       // When the mouse enters the item, set its fill color to red:
       mouseCircles.onMouseEnter = function (event) {
         this.fillColor = 'red';
+        myPath = new Path ();
+        myPath.strokeColor = 'green';
+        myPath.add(event.point);
       }
 
       // When the mouse leaves the item, set its fill color to black:
       mouseCircles.onMouseLeave = function (event) {
         this.fillColor = 'white';
+        myPath.add(event.point);
       }
     }
 

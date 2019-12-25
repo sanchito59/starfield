@@ -51,9 +51,12 @@
       });
       // When the mouse enters the item, set its fill color to red:
       mouseCircles.onMouseEnter = function (event) {
-        this.fillColor = 'red';
-        myPath = new Path ();
-        myPath.strokeColor = 'green';
+        sharedColor = Color.random();
+        this.fillColor = sharedColor;
+        myPath = new Path();
+        myPath.strokeWidth = 5;
+        strokeCap = 'round';
+        myPath.strokeColor = sharedColor;
         myPath.add(event.point);
       }
 
@@ -61,7 +64,27 @@
       mouseCircles.onMouseLeave = function (event) {
         this.fillColor = 'white';
         myPath.add(event.point);
+        var path = new Path.Circle(new Point(event.point), 5);
+        path.strokeColor = 'black';
+        path.fillColor = 'white';
+        path.opacity = 0.5;
       }
+
+    }
+    function onMouseDrag(event) {
+      var path = new Path();
+      path.strokeColor = Color.random();
+      path.strokeWidth = 1.5;
+      var vector = event.delta;
+
+      // rotate the vector by 45 degrees:
+      vector.angle += 45;
+
+      // change its length to 10 pt:
+      vector.length = 10;
+
+      path.add(event.middlePoint + vector);
+      path.add(event.middlePoint - vector);
     }
 
     var group = new Group(path, path2, path3, path4, path5);

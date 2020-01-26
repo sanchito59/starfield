@@ -17,7 +17,7 @@
       fillColor: 'white',
     })
     var starSymbol = new Symbol(stars)
-    
+
     for (var i = 0; i < starCount; i++) {
       var center = Point.random() * view.size;
       var placedSymbol = starSymbol.place(center);
@@ -28,28 +28,27 @@
       var angledStroke = new Path();
       angledStroke.strokeColor = Color.random();
       angledStroke.strokeWidth = 15;
-      angledStroke.strokeCap = 'round';
       var vector = event.delta;
-      
+
       vector.angle += 45;
-      vector.length = 10;
-      
+      vector.length = 20;
+
       angledStroke.add(event.middlePoint + vector);
       angledStroke.add(event.middlePoint - vector);
       brushStrokes.push(angledStroke);
     }
     function onFrame(event) {
-      for(var i = 0; i < brushStrokes.length; i++){
-        brushStrokes[i].scale(3);
+      for (var i = 0; i < brushStrokes.length; i++) {
+        brushStrokes[i].scale(0.9);
       }
-      
+
       for (var i = 0; i < starCount; i++) {
         var item = project.activeLayer.children[i];
         // Move the item 1/5th of its height to the bottom. This way larger circles move faster than smaller circles:
         item.position.y += item.bounds.height / 5;
         // If the item has left the view on the bottom, move it back to the top:
         if (item.bounds.bottom > view.size.height) {
-          item.position.y = -item.bounds.height;
+          item.position.y =- item.bounds.height;
         }
       }
     }
